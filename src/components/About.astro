@@ -1,0 +1,71 @@
+---
+// src/components/About.astro
+---
+
+<section id="about" class="py-20 px-6">
+  <div class="container mx-auto max-w-6xl">
+    <div class="text-center mb-16">
+      <h2 class="text-5xl font-bold text-white mb-4">
+        About <span class="bg-gradient-to-r from-blue-400 to-cyan-400 text-transparent bg-clip-text">Me</span>
+      </h2>
+      <div class="w-20 h-1 bg-gradient-to-r from-blue-500 to-cyan-500 mx-auto rounded-full"></div>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-12 items-center">
+      <div>
+        <div class="relative">
+          <div class="bg-gradient-to-br from-blue-500/20 to-cyan-500/20 backdrop-blur-lg rounded-3xl p-8 border border-blue-500/30">
+            <div class="absolute -top-4 -left-4 w-24 h-24 bg-blue-500 rounded-full filter blur-2xl opacity-30"></div>
+            <div class="absolute -bottom-4 -right-4 w-24 h-24 bg-cyan-500 rounded-full filter blur-2xl opacity-30"></div>
+            
+            <h3 class="text-2xl font-bold text-white mb-4">Who am I?</h3>
+            <p class="text-gray-300 leading-relaxed mb-4">
+              I'm an Information Systems student with strong interpersonal skills and active experience in organizations and internships. I've developed communication, teamwork, leadership, and problem-solving abilities that support effective collaboration.
+            </p>
+            <p class="text-gray-300 leading-relaxed">
+              With a deep interest in research and information technology, I have software engineering experience using Java, PHP, HTML, CSS, Laravel, Node.js, and React. I'm enthusiastic about learning new technologies and quickly adapting to changes.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="space-y-6">
+        <div class="bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-blue-500/20 hover:border-blue-500/40 transition-all duration-300 hover:translate-x-2">
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center flex-shrink-0">
+              <i class="fa-solid fa-lightbulb text-white text-xl"></i>
+            </div>
+            <div>
+              <h4 class="text-lg font-semibold text-white mb-2">Problem Solver</h4>
+              <p class="text-gray-400 text-sm">Enjoy tackling complex challenges and finding elegant solutions through innovative approaches</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-cyan-500/20 hover:border-cyan-500/40 transition-all duration-300 hover:translate-x-2">
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-lg flex items-center justify-center flex-shrink-0">
+              <i class="fa-solid fa-book text-white text-xl"></i>
+            </div>
+            <div>
+              <h4 class="text-lg font-semibold text-white mb-2">Continuous Learner</h4>
+              <p class="text-gray-400 text-sm">Always exploring new technologies and staying updated with industry trends and best practices</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-blue-500/20 hover:border-blue-500/40 transition-all duration-300 hover:translate-x-2">
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center flex-shrink-0">
+              <i class="fa-solid fa-users text-white text-xl"></i>
+            </div>
+            <div>
+              <h4 class="text-lg font-semibold text-white mb-2">Team Player</h4>
+              <p class="text-gray-400 text-sm">Collaborative mindset with strong communication skills and leadership experience</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

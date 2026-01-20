@@ -1,0 +1,60 @@
+---
+// src/components/Hero.astro
+// Ganti dengan path foto Anda
+// Contoh: '/images/profile.jpg' atau 'https://example.com/photo.jpg'
+const profileImage = '/images/profile.jpeg'; // <-- Ubah path ini
+---
+
+<section class="min-h-screen flex items-center justify-center pt-20 px-6">
+  <div class="container mx-auto text-center max-w-5xl">
+    <div class="mb-8 animate-fade-in">
+      <div class="relative inline-block">
+        <!-- Profile Image -->
+        <div class="w-40 h-40 rounded-full overflow-hidden border-4 border-gradient-to-br from-blue-500 to-cyan-500 shadow-2xl shadow-blue-500/30 animate-float">
+          <img 
+            src={profileImage} 
+            alt="Azaila Dwi Putri Fajarwati"
+            class="w-full h-full object-cover"
+          />
+      </div>
+    </div>
+    
+    <h1 class="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight animate-slide-down">
+      Hi, I'm <span class="bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-500 text-transparent bg-clip-text">Azaila Dwi Putri Fajarwati</span>
+    </h1>
+    
+    <p class="text-2xl md:text-3xl text-transparent bg-clip-text bg-gradient-to-r from-gray-300 to-gray-400 mb-4 animate-slide-up">
+      Junior Web Developer 
+    </p>
+
+    <p class="text-lg text-gray-400 mb-12 max-w-2xl mx-auto animate-fade-in">
+      Information Systems student with strong interpersonal skills and active experience in organizations and internships. Passionate about research and information technology.
+    </p>
+
+    <div class="flex justify-center items-center gap-3 text-gray-400 mb-12 animate-fade-in">
+      <i class="fa-solid fa-location-dot text-blue-400"></i>
+      <span>Kediri, East Java, Indonesia</span>
+    </div>
+
+    <div class="flex justify-center gap-4 flex-wrap animate-fade-in">
+      <a
+        href="#projects"
+        class="group inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-600 to-cyan-600 text-white rounded-full font-medium hover:shadow-xl hover:shadow-blue-500/50 transition-all duration-300 hover:scale-105"
+      >
+        View My Work
+        <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+      </a>
+      <a
+        href="mailto:putryazaila1306@gmail.com"
+        class="inline-flex items-center gap-2 px-8 py-4 bg-white/10 backdrop-blur-sm text-white rounded-full font-medium hover:bg-white/20 transition-all duration-300 border border-blue-500/30 hover:border-blue-500/60 hover:scale-105"
+      >
+        <i class="fa-solid fa-envelope"></i>
+        Get in Touch
+      </a>
+    </div>
+
+    <div class="mt-20 animate-bounce">
+      <i class="fa-solid fa-chevron-down text-blue-400 text-2xl"></i>
+    </div>
+  </div>
+</section>

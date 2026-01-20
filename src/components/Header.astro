@@ -1,0 +1,256 @@
+---
+// src/components/Header.astro
+---
+
+<header class="fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 lg:px-8 pt-4 transition-all duration-500" id="header">
+  <div class="max-w-7xl mx-auto bg-slate-950/70 backdrop-blur-2xl rounded-full shadow-lg border border-white/10 px-4 lg:px-6 transition-all duration-500">
+    <div class="flex justify-between items-center h-14 lg:h-16">
+
+      <!-- Desktop Menu -->
+      <nav class="hidden lg:flex items-center gap-1">
+        <a href="#about" class="px-3 lg:px-4 py-2 rounded-full text-sm lg:text-base font-medium text-gray-300 hover:text-white hover:bg-white/10 transition-all duration-300">
+          About
+        </a>
+        <a href="#skills" class="px-3 lg:px-4 py-2 rounded-full text-sm lg:text-base font-medium text-gray-300 hover:text-white hover:bg-white/10 transition-all duration-300">
+          Skills
+        </a>
+        <a href="#experience" class="px-3 lg:px-4 py-2 rounded-full text-sm lg:text-base font-medium text-gray-300 hover:text-white hover:bg-white/10 transition-all duration-300">
+          Experience
+        </a>
+        <a href="#education" class="px-3 lg:px-4 py-2 rounded-full text-sm lg:text-base font-medium text-gray-300 hover:text-white hover:bg-white/10 transition-all duration-300">
+          Education
+        </a>
+        <a href="#certificates" class="px-3 lg:px-4 py-2 rounded-full text-sm lg:text-base font-medium text-gray-300 hover:text-white hover:bg-white/10 transition-all duration-300">
+          Certificates
+        </a>
+        <a href="#projects" class="px-3 lg:px-4 py-2 rounded-full text-sm lg:text-base font-medium text-gray-300 hover:text-white hover:bg-white/10 transition-all duration-300">
+          Projects
+        </a>
+      </nav>
+
+      <!-- Right Actions -->
+      <div class="flex items-center gap-2">
+        
+        <!-- Contact Button -->
+        <a 
+          href="mailto:putryazaila1306@gmail.com"
+          class="hidden sm:flex items-center gap-1.5 px-4 lg:px-5 py-2 lg:py-2.5 rounded-full bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white font-medium text-sm lg:text-base shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105"
+        >
+          <i class="fa-solid fa-envelope text-xs lg:text-sm"></i>
+          <span>Contact</span>
+        </a>
+        
+        <!-- Mobile Menu Toggle -->
+        <button 
+          id="mobileToggle"
+          class="lg:hidden w-9 h-9 lg:w-10 lg:h-10 rounded-full bg-white/10 hover:bg-white/20 hover:scale-110 active:scale-95 flex flex-col items-center justify-center gap-1.5 transition-all duration-300"
+          aria-label="Toggle menu"
+        >
+          <span class="hamburger w-4 h-0.5 bg-white rounded-full transition-all duration-300"></span>
+          <span class="hamburger w-4 h-0.5 bg-white rounded-full transition-all duration-300"></span>
+          <span class="hamburger w-4 h-0.5 bg-white rounded-full transition-all duration-300"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Menu Overlay -->
+  <div 
+    id="mobileMenuOverlay"
+    class="lg:hidden fixed inset-0 bg-black/60 backdrop-blur-sm opacity-0 invisible transition-all duration-300 z-40"
+    style="top: 0;"
+  >
+    <div 
+      id="mobileMenu"
+      class="absolute right-4 top-20 w-full max-w-sm bg-slate-950/95 backdrop-blur-2xl rounded-3xl shadow-xl border border-white/10 transform translate-x-full transition-all duration-500 overflow-hidden"
+    >
+      <div class="p-5">
+        <!-- Mobile Logo -->
+        <div class="flex items-center gap-2.5 mb-5 pb-5 border-b border-white/10">
+          <div class="w-9 h-9 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center text-white font-bold">
+            AP
+          </div>
+          <div>
+            <span class="text-base font-bold text-white block">Azaila Putri</span>
+            <span class="text-xs text-gray-400">Portfolio</span>
+          </div>
+        </div>
+
+        <!-- Mobile Menu Items -->
+        <nav class="space-y-1.5 mb-5">
+          <a 
+            href="#about"
+            class="flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-medium text-gray-300 hover:text-white hover:bg-white/10 transition-all duration-300"
+          >
+            <i class="fa-solid fa-user w-5 text-center"></i>
+            <span>About</span>
+          </a>
+          <a 
+            href="#skills"
+            class="flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-medium text-gray-300 hover:text-white hover:bg-white/10 transition-all duration-300"
+          >
+            <i class="fa-solid fa-code w-5 text-center"></i>
+            <span>Skills</span>
+          </a>
+          <a 
+            href="#experience"
+            class="flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-medium text-gray-300 hover:text-white hover:bg-white/10 transition-all duration-300"
+          >
+            <i class="fa-solid fa-briefcase w-5 text-center"></i>
+            <span>Experience</span>
+          </a>
+          <a 
+            href="#education"
+            class="flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-medium text-gray-300 hover:text-white hover:bg-white/10 transition-all duration-300"
+          >
+            <i class="fa-solid fa-graduation-cap w-5 text-center"></i>
+            <span>Education</span>
+          </a>
+          <a 
+            href="#certificates"
+            class="flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-medium text-gray-300 hover:text-white hover:bg-white/10 transition-all duration-300"
+          >
+            <i class="fa-solid fa-certificate w-5 text-center"></i>
+            <span>Certificates</span>
+          </a>
+          <a 
+            href="#projects"
+            class="flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-medium text-gray-300 hover:text-white hover:bg-white/10 transition-all duration-300"
+          >
+            <i class="fa-solid fa-laptop-code w-5 text-center"></i>
+            <span>Projects</span>
+          </a>
+        </nav>
+
+        <!-- Mobile Contact Button -->
+        <div class="pt-5 border-t border-white/10">
+          <a 
+            href="mailto:putryazaila1306@gmail.com"
+            class="flex items-center justify-center gap-2 w-full px-5 py-3 rounded-2xl bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white font-medium shadow-md hover:shadow-lg transition-all duration-300"
+          >
+            <i class="fa-solid fa-envelope"></i>
+            <span>Contact Me</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  // Mobile menu toggle
+  const mobileToggle = document.getElementById('mobileToggle');
+  const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+  const mobileMenu = document.getElementById('mobileMenu');
+
+  if (mobileToggle && mobileMenuOverlay && mobileMenu) {
+    mobileToggle.addEventListener('click', () => {
+      const isOpen = mobileMenuOverlay.classList.contains('opacity-0');
+      
+      if (isOpen) {
+        mobileMenuOverlay.classList.remove('opacity-0', 'invisible');
+        mobileMenu.classList.remove('translate-x-full');
+        document.body.style.overflow = 'hidden';
+        
+        const hamburgers = mobileToggle.querySelectorAll('.hamburger');
+        (hamburgers[0] as HTMLElement).style.transform = 'rotate(45deg) translateY(7px)';
+        (hamburgers[1] as HTMLElement).style.opacity = '0';
+        (hamburgers[2] as HTMLElement).style.transform = 'rotate(-45deg) translateY(-7px)';
+      } else {
+        mobileMenuOverlay.classList.add('opacity-0', 'invisible');
+        mobileMenu.classList.add('translate-x-full');
+        document.body.style.overflow = '';
+        
+        const hamburgers = mobileToggle.querySelectorAll('.hamburger');
+        (hamburgers[0] as HTMLElement).style.transform = '';
+        (hamburgers[1] as HTMLElement).style.opacity = '';
+        (hamburgers[2] as HTMLElement).style.transform = '';
+      }
+    });
+
+    mobileMenuOverlay.addEventListener('click', (e) => {
+      if (e.target === mobileMenuOverlay) {
+        mobileMenuOverlay.classList.add('opacity-0', 'invisible');
+        mobileMenu.classList.add('translate-x-full');
+        document.body.style.overflow = '';
+        
+        const hamburgers = mobileToggle.querySelectorAll('.hamburger');
+        (hamburgers[0] as HTMLElement).style.transform = '';
+        (hamburgers[1] as HTMLElement).style.opacity = '';
+        (hamburgers[2] as HTMLElement).style.transform = '';
+      }
+    });
+
+    const mobileLinks = mobileMenu.querySelectorAll('a');
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenuOverlay.classList.add('opacity-0', 'invisible');
+        mobileMenu.classList.add('translate-x-full');
+        document.body.style.overflow = '';
+        
+        const hamburgers = mobileToggle.querySelectorAll('.hamburger');
+        (hamburgers[0] as HTMLElement).style.transform = '';
+        (hamburgers[1] as HTMLElement).style.opacity = '';
+        (hamburgers[2] as HTMLElement).style.transform = '';
+      });
+    });
+  }
+
+  // Floating Scroll Effect
+  let lastScroll = 0;
+  const header = document.getElementById('header');
+  const headerInner = header?.querySelector('div.max-w-7xl') as HTMLElement | null;
+  
+  window.addEventListener('scroll', () => {
+    const currentScroll = window.pageYOffset;
+    
+    if (currentScroll > 20) {
+      header?.classList.add('pt-3');
+      header?.classList.remove('pt-4');
+      headerInner?.classList.add('shadow-xl');
+    } else {
+      header?.classList.remove('pt-3');
+      header?.classList.add('pt-4');
+      headerInner?.classList.remove('shadow-xl');
+    }
+    
+    if (currentScroll > lastScroll && currentScroll > 100) {
+      header?.classList.add('-translate-y-full');
+    } else {
+      header?.classList.remove('-translate-y-full');
+    }
+    
+    lastScroll = currentScroll;
+  });
+</script>
+
+<style>
+  #header {
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), padding-top 0.3s ease;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-3px); }
+  }
+
+  #header:hover > div {
+    animation: float 2.5s ease-in-out infinite;
+  }
+
+  :global(body) {
+    padding-top: 85px;
+  }
+
+  @media (max-width: 1024px) {
+    :global(body) {
+      padding-top: 80px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    :global(body) {
+      padding-top: 75px;
+    }
+  }
+</style>

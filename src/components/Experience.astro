@@ -1,0 +1,162 @@
+---
+// src/components/Experience.astro
+const experiences = [
+  {
+    title: "Intern",
+    company: "Telkom Landmark Surabaya",
+    type: "Internship",
+    period: "Nov 2023 - Apr 2024",
+    location: "Surabaya, Indonesia",
+    description: "Developed attendance website using Node.js and enhanced web applications using Laravel and React.",
+    technologies: ["Node.js", "Laravel", "React", "MySQL"],
+    icon: "fa-solid fa-briefcase",
+    color: "from-blue-500 to-cyan-500",
+    highlights: [
+      "Built attendance system with camera and location features",
+      "Collaborated with 4 team members on project delivery",
+      "Developed and integrated multiple websites"
+    ]
+  },
+  {
+    title: "Staff - Research & IT Department",
+    company: "HIPMI (Indonesian Young Entrepreneurs Association)",
+    type: "Organization",
+    period: "Jan 2025 - Present",
+    location: "Remote",
+    description: "Creating HIPMI landing page website and managing IT infrastructure while participating in video profile creation as Public Relations.",
+    technologies: ["React", "HTML", "CSS", "Web Design"],
+    icon: "fa-solid fa-rocket",
+    color: "from-purple-500 to-pink-500",
+    highlights: [
+      "Developed HIPMI landing page website",
+      "Participated in video profile creation",
+      "Managed department communications"
+    ]
+  },
+  {
+    title: "Intern - Human Resource Development",
+    company: "HMSI (Information Systems Student Association)",
+    type: "Internship",
+    period: "Apr 2025 - Present",
+    location: "Purwokerto, Indonesia",
+    description: "Active in multiple committees including Student Achievement (Secretary), Sports Week (Event Division), International Guest Lecture (PR), and various other events.",
+    technologies: ["Event Management", "Communication", "Documentation"],
+    icon: "fa-solid fa-bullseye",
+    color: "from-green-500 to-emerald-500",
+    highlights: [
+      "Secretary for Student Achievement Committee",
+      "Event Division for Sports Week",
+      "PR for International Guest Lecture"
+    ]
+  },
+  {
+    title: "Library Staff",
+    company: "Pustel (Telkom Malang Library)",
+    type: "Organization",
+    period: "Nov 2021 - Oct 2023",
+    location: "Malang, Indonesia",
+    description: "Collaborated with 24 people in creating online and offline bulletin boards. Participated in Language Month events and library recruitment processes.",
+    technologies: ["Canva", "Content Creation", "Team Collaboration"],
+    icon: "fa-solid fa-book",
+    color: "from-yellow-500 to-orange-500",
+    highlights: [
+      "Created online and offline bulletin boards",
+      "Participated in Language Month flashback events",
+      "Involved in library recruitment and regeneration"
+    ]
+  }
+];
+---
+
+<section id="experience" class="py-20 px-6">
+  <div class="container mx-auto max-w-6xl">
+    <div class="text-center mb-16">
+      <h2 class="text-5xl font-bold text-white mb-4">
+        Work <span class="bg-gradient-to-r from-blue-400 to-cyan-400 text-transparent bg-clip-text">Experience</span>
+      </h2>
+      <div class="w-20 h-1 bg-gradient-to-r from-blue-500 to-cyan-500 mx-auto rounded-full"></div>
+      <p class="text-gray-400 mt-4">Professional journey and key roles</p>
+    </div>
+
+    <div class="relative max-w-4xl mx-auto">
+      <!-- Timeline line -->
+      <div class="absolute left-10 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-500 to-cyan-500 hidden md:block"></div>
+
+      <div class="space-y-12">
+        {experiences.map((exp) => (
+          <div class="relative">
+            <!-- Timeline dot -->
+            <div class="absolute left-8 w-6 h-6 bg-gradient-to-br from-blue-400 to-cyan-400 rounded-full border-4 border-slate-950 hidden md:block transform -translate-x-1"></div>
+
+            <div class="md:ml-24">
+              <div class="group bg-gradient-to-br from-white/5 to-white/0 backdrop-blur-lg rounded-2xl p-8 border border-blue-500/20 hover:border-blue-400/60 transition-all duration-500 hover:scale-105">
+                <div class="flex flex-col md:flex-row gap-6">
+                  <!-- Icon -->
+                  <div class="flex-shrink-0">
+                    <div class={`w-16 h-16 bg-gradient-to-br ${exp.color} rounded-xl flex items-center justify-center group-hover:rotate-12 transition-transform duration-300`}>
+                      <i class={`${exp.icon} text-white text-2xl`}></i>
+                    </div>
+                  </div>
+
+                  <!-- Content -->
+                  <div class="flex-1">
+                    <div class="flex flex-col md:flex-row md:items-start md:justify-between mb-3">
+                      <div>
+                        <h3 class="text-2xl font-bold text-white mb-1">{exp.title}</h3>
+                        <p class="text-blue-300 font-medium text-lg">{exp.company}</p>
+                      </div>
+                      <div class="flex gap-2 mt-2 md:mt-0">
+                        <span class="inline-flex items-center gap-2 px-4 py-1 bg-cyan-500/20 text-cyan-300 rounded-full text-sm font-medium">
+                          <i class="fa-solid fa-briefcase"></i>
+                          {exp.type}
+                        </span>
+                      </div>
+                    </div>
+
+                    <div class="flex flex-wrap items-center gap-4 text-gray-400 mb-4">
+                      <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-calendar"></i>
+                        <span class="text-sm">{exp.period}</span>
+                      </div>
+                      <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <span class="text-sm">{exp.location}</span>
+                      </div>
+                    </div>
+
+                    <p class="text-gray-300 mb-4">{exp.description}</p>
+
+                    <!-- Highlights -->
+                    <div class="mb-4">
+                      <p class="text-sm text-gray-400 font-semibold mb-2">
+                        <i class="fa-solid fa-star text-yellow-400 mr-2"></i>
+                        Key Achievements:
+                      </p>
+                      <ul class="space-y-1">
+                        {exp.highlights.map((highlight) => (
+                          <li class="text-sm text-gray-400 flex items-start gap-2">
+                            <i class="fa-solid fa-check text-green-400 mt-1"></i>
+                            <span>{highlight}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    <!-- Technologies -->
+                    <div class="flex flex-wrap gap-2">
+                      {exp.technologies.map((tech) => (
+                        <span class="px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-xs font-medium">
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

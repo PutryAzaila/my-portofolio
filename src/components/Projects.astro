@@ -1,0 +1,277 @@
+---
+// src/components/Projects.astro
+---
+
+<section id="projects" class="py-12 md:py-20 px-4 md:px-6 bg-white/5">
+  <div class="container mx-auto max-w-7xl">
+    <div class="text-center mb-8 md:mb-12">
+      <h2 class="text-3xl md:text-5xl font-bold text-white mb-3 md:mb-4">
+        Featured <span class="bg-gradient-to-r from-blue-400 to-cyan-400 text-transparent bg-clip-text">Projects</span>
+      </h2>
+      <div class="w-16 md:w-20 h-1 bg-gradient-to-r from-blue-500 to-cyan-500 mx-auto rounded-full"></div>
+      <p class="text-gray-400 mt-3 md:mt-4 text-sm md:text-base">Automatically synced with GitHub repositories</p>
+    </div>
+
+    <div id="loading" class="text-center py-8 md:py-12">
+      <div class="inline-block animate-spin w-10 h-10 md:w-12 md:h-12 border-4 border-blue-500 border-t-transparent rounded-full mb-3 md:mb-4"></div>
+      <p class="text-gray-400 text-sm md:text-base">Loading projects...</p>
+    </div>
+
+    <div id="error-message" class="hidden text-center py-8 md:py-12">
+      <i class="fa-brands fa-github text-gray-500 text-5xl md:text-6xl mb-3 md:mb-4"></i>
+      <p class="text-gray-400 text-sm md:text-base">Unable to load repositories. Please check back later.</p>
+    </div>
+
+    <div id="projects-grid" class="hidden grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6"></div>
+
+    <div id="more-projects" class="hidden grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mt-4 md:mt-6"></div>
+
+    <div id="see-more-container" class="hidden text-center mt-8 md:mt-12">
+      <button
+        id="see-more-btn"
+        class="inline-flex items-center gap-2 px-6 md:px-8 py-3 md:py-4 bg-gradient-to-r from-blue-600 to-cyan-600 text-white rounded-full font-medium hover:shadow-xl hover:shadow-blue-500/50 transition-all duration-300 hover:scale-105 text-sm md:text-base"
+      >
+        <span id="btn-text">See More Projects</span>
+        <i id="btn-icon" class="fa-solid fa-chevron-down"></i>
+      </button>
+    </div>
+  </div>
+</section>
+
+<script>
+  const GITHUB_USERNAME = 'PutryAzaila';
+
+  // Fallback data jika GitHub API gagal
+  const fallbackRepos = [
+    {
+      name: 'Website-Kasir-Laundry',
+      description: 'Laundry cashier management system built with PHP and MySQL',
+      html_url: 'https://github.com/PutryAzaila',
+      language: 'PHP',
+      stargazers_count: 0,
+      forks_count: 0,
+      updated_at: '2022-11-01T00:00:00Z'
+    },
+    {
+      name: 'Website-Toko-Online',
+      description: 'E-commerce website built with PHP native and MySQL database',
+      html_url: 'https://github.com/PutryAzaila',
+      language: 'PHP',
+      stargazers_count: 0,
+      forks_count: 0,
+      updated_at: '2022-10-01T00:00:00Z'
+    },
+    {
+      name: 'Website-Kasir-Cafe',
+      description: 'Cafe cashier system with Node.js and React frontend',
+      html_url: 'https://github.com/PutryAzaila',
+      language: 'JavaScript',
+      stargazers_count: 0,
+      forks_count: 0,
+      updated_at: '2023-05-01T00:00:00Z'
+    },
+    {
+      name: 'Attendance-App',
+      description: 'Attendance system with camera and location features using Node.js and React',
+      html_url: 'https://github.com/PutryAzaila',
+      language: 'JavaScript',
+      stargazers_count: 0,
+      forks_count: 0,
+      updated_at: '2023-12-01T00:00:00Z'
+    },
+    {
+      name: 'HIPMI-Landing-Page',
+      description: 'Landing page website for HIPMI organization',
+      html_url: 'https://github.com/PutryAzaila',
+      language: 'HTML',
+      stargazers_count: 0,
+      forks_count: 0,
+      updated_at: '2025-01-01T00:00:00Z'
+    },
+    {
+      name: 'Portfolio-Website',
+      description: 'Personal portfolio website built with Astro and Tailwind CSS',
+      html_url: 'https://github.com/PutryAzaila',
+      language: 'TypeScript',
+      stargazers_count: 0,
+      forks_count: 0,
+      updated_at: '2025-01-20T00:00:00Z'
+    }
+  ];
+
+  const getLanguageColor = (language: string) => {
+    const colors: { [key: string]: string } = {
+      JavaScript: 'bg-yellow-400',
+      TypeScript: 'bg-blue-400',
+      Python: 'bg-green-400',
+      Java: 'bg-red-400',
+      HTML: 'bg-orange-400',
+      CSS: 'bg-pink-400',
+      PHP: 'bg-purple-400',
+      'Jupyter Notebook': 'bg-orange-500',
+    };
+    return colors[language] || 'bg-gray-400';
+  };
+
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-US', { 
+      year: 'numeric', 
+      month: 'short', 
+      day: 'numeric' 
+    });
+  };
+
+  const createRepoCard = (repo: any) => {
+    return `
+      <div class="group bg-white/5 backdrop-blur-lg rounded-2xl p-4 md:p-6 border border-white/10 hover:border-indigo-400/50 transition-all duration-300 hover:shadow-xl hover:shadow-indigo-500/20 hover:-translate-y-2">
+        <div class="flex items-start justify-between mb-3 md:mb-4">
+          <div class="flex items-center gap-2 flex-1 min-w-0">
+            <i class="fa-solid fa-folder-open text-indigo-400 text-sm md:text-base flex-shrink-0"></i>
+            <h3 class="text-base md:text-lg font-semibold text-white group-hover:text-indigo-300 transition-colors truncate">
+              ${repo.name}
+            </h3>
+          </div>
+          <a
+            href="${repo.html_url}"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-gray-400 hover:text-white transition-colors flex-shrink-0 ml-2"
+          >
+            <i class="fa-solid fa-arrow-up-right-from-square text-sm"></i>
+          </a>
+        </div>
+
+        <p class="text-gray-400 text-xs md:text-sm mb-3 md:mb-4 line-clamp-2 min-h-[32px] md:min-h-[40px]">
+          ${repo.description || 'No description provided'}
+        </p>
+
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-xs md:text-sm mb-3 md:mb-4">
+          <div class="flex items-center gap-2 md:gap-3 text-gray-400">
+            ${repo.language ? `
+              <span class="flex items-center gap-1 md:gap-1.5">
+                <div class="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full ${getLanguageColor(repo.language)}"></div>
+                <span class="text-xs">${repo.language}</span>
+              </span>
+            ` : ''}
+          </div>
+          <div class="flex items-center gap-2 md:gap-3 text-gray-400">
+            <span class="flex items-center gap-1">
+              <i class="fa-solid fa-star text-yellow-400 text-xs"></i>
+              ${repo.stargazers_count}
+            </span>
+            <span class="flex items-center gap-1">
+              <i class="fa-solid fa-code-fork text-blue-400 text-xs"></i>
+              ${repo.forks_count}
+            </span>
+          </div>
+        </div>
+
+        <div class="pt-3 md:pt-4 border-t border-white/10">
+          <span class="text-xs text-gray-500 flex items-center gap-1">
+            <i class="fa-solid fa-clock"></i>
+            Updated ${formatDate(repo.updated_at)}
+          </span>
+        </div>
+      </div>
+    `;
+  };
+
+  const fetchGitHubRepos = async () => {
+    const loading = document.getElementById('loading');
+    const errorMessage = document.getElementById('error-message');
+    const projectsGrid = document.getElementById('projects-grid');
+    const moreProjects = document.getElementById('more-projects');
+    const seeMoreContainer = document.getElementById('see-more-container');
+
+    let repos: any[] = [];
+
+    try {
+      const response = await fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=100`);
+      
+      if (!response.ok) {
+        // Jika error, gunakan fallback data
+        console.warn('GitHub API rate limit reached, using fallback data');
+        repos = fallbackRepos;
+      } else {
+        const allRepos = await response.json();
+        
+        if (!Array.isArray(allRepos)) {
+          repos = fallbackRepos;
+        } else {
+          repos = allRepos
+            .filter((repo: any) => !repo.fork)
+            .sort((a: any, b: any) => {
+              if (b.stargazers_count !== a.stargazers_count) {
+                return b.stargazers_count - a.stargazers_count;
+              }
+              return new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime();
+            });
+        }
+      }
+    } catch (error) {
+      console.warn('Error fetching GitHub repos, using fallback data:', error);
+      repos = fallbackRepos;
+    }
+
+    if (loading) loading.classList.add('hidden');
+
+    if (repos.length === 0) {
+      if (errorMessage) {
+        errorMessage.classList.remove('hidden');
+      }
+      return;
+    }
+
+    const initialRepos = repos.slice(0, 6);
+    const remainingRepos = repos.slice(6);
+
+    if (projectsGrid) {
+      projectsGrid.innerHTML = initialRepos.map(createRepoCard).join('');
+      projectsGrid.classList.remove('hidden');
+    }
+
+    if (remainingRepos.length > 0 && moreProjects && seeMoreContainer) {
+      moreProjects.innerHTML = remainingRepos.map(createRepoCard).join('');
+      seeMoreContainer.classList.remove('hidden');
+
+      const seeMoreBtn = document.getElementById('see-more-btn');
+      const btnText = document.getElementById('btn-text');
+      const btnIcon = document.getElementById('btn-icon');
+      let isExpanded = false;
+
+      if (seeMoreBtn && btnText && btnIcon) {
+        seeMoreBtn.addEventListener('click', () => {
+          isExpanded = !isExpanded;
+          
+          if (isExpanded) {
+            moreProjects.classList.remove('hidden');
+            moreProjects.classList.add('grid');
+            btnText.textContent = 'Show Less';
+            btnIcon.classList.remove('fa-chevron-down');
+            btnIcon.classList.add('fa-chevron-up');
+          } else {
+            moreProjects.classList.add('hidden');
+            moreProjects.classList.remove('grid');
+            btnText.textContent = 'See More Projects';
+            btnIcon.classList.remove('fa-chevron-up');
+            btnIcon.classList.add('fa-chevron-down');
+            
+            // Scroll to projects section
+            const projectsSection = document.getElementById('projects');
+            if (projectsSection) {
+              projectsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+          }
+        });
+      }
+    }
+  };
+
+  // Fetch repos when page loads
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', fetchGitHubRepos);
+  } else {
+    fetchGitHubRepos();
+  }
+</script>

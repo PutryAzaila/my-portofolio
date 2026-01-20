@@ -1,0 +1,86 @@
+---
+// src/components/Certificates.astro
+const certificates = [
+  {
+    title: "Certificate of Competency - Node & React JS",
+    issuer: "DOT",
+    date: "2023",
+    icon: "fa-solid fa-award",
+    color: "from-blue-500 to-cyan-500",
+    link: "https://drive.google.com/file/d/1fq-SLHcQBPBVk5UHE6H9G0HjSg2s4XNf/view?usp=sharing"
+  },
+  {
+    title: "MTA JavaScript",
+    issuer: "Microsoft Technology Associate",
+    date: "2023",
+    icon: "fa-solid fa-certificate",
+    color: "from-green-500 to-emerald-500",
+    link: "https://drive.google.com/file/d/1NHe9jJ-0zejlcw3hKkEku-axZvVR1dvy/view?usp=sharing"
+  },
+  {
+    title: "Junior UI/UX Designer",
+    issuer: "BNSP (Indonesian National Professional Certification Agency)",
+    date: "2023",
+    icon: "fa-solid fa-palette",
+    color: "from-purple-500 to-pink-500",
+    link: "https://drive.google.com/file/d/17Gbgdtlu83pW8KnVAms2bLeco_-SW65J/view?usp=sharing"
+  },
+  {
+    title: "Junior Graphic Designer",
+    issuer: "BNSP (Indonesian National Professional Certification Agency)",
+    date: "2022",
+    icon: "fa-solid fa-pen-nib",
+    color: "from-orange-500 to-red-500",
+    link: "https://drive.google.com/file/d/1AruXdaNT9ym2E021w9wefgmtZV9g00tk/view?usp=sharing"
+  }
+];
+---
+
+<section id="certificates" class="py-20 px-6">
+  <div class="container mx-auto max-w-6xl">
+    <div class="text-center mb-16">
+      <h2 class="text-5xl font-bold text-white mb-4">
+        Certificates & <span class="bg-gradient-to-r from-blue-400 to-cyan-400 text-transparent bg-clip-text">Achievements</span>
+      </h2>
+      <div class="w-20 h-1 bg-gradient-to-r from-blue-500 to-cyan-500 mx-auto rounded-full"></div>
+      <p class="text-gray-400 mt-4">Professional certifications and accomplishments</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-6">
+      {certificates.map((cert) => (
+        <div class="group bg-gradient-to-br from-white/5 to-white/0 backdrop-blur-lg rounded-2xl p-6 border border-blue-500/20 hover:border-blue-400/60 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/20">
+          <div class="flex items-start gap-4">
+            <!-- Icon -->
+            <div class={`w-16 h-16 bg-gradient-to-br ${cert.color} rounded-xl flex items-center justify-center flex-shrink-0 group-hover:rotate-12 transition-transform duration-300`}>
+              <i class={`${cert.icon} text-white text-2xl`}></i>
+            </div>
+
+            <!-- Content -->
+            <div class="flex-1">
+              <h3 class="text-xl font-bold text-white mb-1 group-hover:text-blue-300 transition-colors">
+                {cert.title}
+              </h3>
+              <p class="text-blue-300 font-medium mb-2">{cert.issuer}</p>
+              
+              <div class="flex items-center justify-between mt-3">
+                <span class="flex items-center gap-2 text-sm text-gray-400">
+                  <i class="fa-solid fa-calendar"></i>
+                  {cert.date}
+                </span>
+                <a 
+                  href={cert.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="flex items-center gap-2 px-4 py-2 bg-blue-500/20 hover:bg-blue-500/30 text-blue-400 hover:text-blue-300 rounded-lg transition-all duration-300 text-sm font-medium"
+                >
+                  <span>View</span>
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
