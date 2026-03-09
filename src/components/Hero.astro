@@ -1,15 +1,12 @@
 ---
-// src/components/Hero.astro
-// Ganti dengan path foto Anda
-// Contoh: '/images/profile.jpg' atau 'https://example.com/photo.jpg'
-const profileImage = '/images/profile.jpeg'; // <-- Ubah path ini
+
+const profileImage = '/images/profile.jpg';
 ---
 
 <section class="min-h-screen flex items-center justify-center pt-20 px-6">
   <div class="container mx-auto text-center max-w-5xl">
     <div class="mb-8 animate-fade-in">
       <div class="relative inline-block">
-        <!-- Profile Image -->
         <div class="w-40 h-40 rounded-full overflow-hidden border-4 border-gradient-to-br from-blue-500 to-cyan-500 shadow-2xl shadow-blue-500/30 animate-float">
           <img 
             src={profileImage} 

@@ -1,12 +1,9 @@
----
-// src/components/Header.astro
----
+
 
 <header class="fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 lg:px-8 pt-4 transition-all duration-500" id="header">
   <div class="max-w-7xl mx-auto bg-slate-950/70 backdrop-blur-2xl rounded-full shadow-lg border border-white/10 px-4 lg:px-6 transition-all duration-500">
     <div class="flex justify-between items-center h-14 lg:h-16">
 
-      <!-- Desktop Menu -->
       <nav class="hidden lg:flex items-center gap-1">
         <a href="#about" class="px-3 lg:px-4 py-2 rounded-full text-sm lg:text-base font-medium text-gray-300 hover:text-white hover:bg-white/10 transition-all duration-300">
           About
@@ -28,10 +25,8 @@
         </a>
       </nav>
 
-      <!-- Right Actions -->
       <div class="flex items-center gap-2">
         
-        <!-- Contact Button -->
         <a 
           href="mailto:putryazaila1306@gmail.com"
           class="hidden sm:flex items-center gap-1.5 px-4 lg:px-5 py-2 lg:py-2.5 rounded-full bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white font-medium text-sm lg:text-base shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105"
@@ -40,7 +35,6 @@
           <span>Contact</span>
         </a>
         
-        <!-- Mobile Menu Toggle -->
         <button 
           id="mobileToggle"
           class="lg:hidden w-9 h-9 lg:w-10 lg:h-10 rounded-full bg-white/10 hover:bg-white/20 hover:scale-110 active:scale-95 flex flex-col items-center justify-center gap-1.5 transition-all duration-300"
@@ -54,7 +48,6 @@
     </div>
   </div>
 
-  <!-- Mobile Menu Overlay -->
   <div 
     id="mobileMenuOverlay"
     class="lg:hidden fixed inset-0 bg-black/60 backdrop-blur-sm opacity-0 invisible transition-all duration-300 z-40"
@@ -65,18 +58,13 @@
       class="absolute right-4 top-20 w-full max-w-sm bg-slate-950/95 backdrop-blur-2xl rounded-3xl shadow-xl border border-white/10 transform translate-x-full transition-all duration-500 overflow-hidden"
     >
       <div class="p-5">
-        <!-- Mobile Logo -->
         <div class="flex items-center gap-2.5 mb-5 pb-5 border-b border-white/10">
-          <div class="w-9 h-9 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center text-white font-bold">
-            AP
-          </div>
           <div>
             <span class="text-base font-bold text-white block">Azaila Putri</span>
             <span class="text-xs text-gray-400">Portofolio</span>
           </div>
         </div>
 
-        <!-- Mobile Menu Items -->
         <nav class="space-y-1.5 mb-5">
           <a 
             href="#about"
