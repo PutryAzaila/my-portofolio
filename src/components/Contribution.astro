@@ -1,0 +1,215 @@
+<section class="py-10 px-4 md:px-6">
+  <div class="container mx-auto max-w-4xl">
+
+    <div class="flex items-end justify-between flex-wrap gap-3 mb-5">
+      <div>
+        <h2 class="text-2xl md:text-3xl font-bold text-white tracking-tight">
+          GitHub <span class="bg-gradient-to-r from-sky-400 to-indigo-400 text-transparent bg-clip-text">Contributions</span>
+        </h2>
+      </div>
+      <div id="year-tabs" class="flex gap-1 bg-white/5 rounded-xl p-1"></div>
+    </div>
+
+    <div class="relative bg-white/[0.03] border border-white/10 rounded-2xl p-4 mb-3 overflow-hidden">
+      <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-sky-500/40 to-transparent"></div>
+
+      <div class="flex items-center justify-between mb-3">
+        <p id="contrib-count" class="font-mono text-[11px] text-gray-400">Loading...</p>
+        <div class="flex items-center gap-1.5">
+          <span class="font-mono text-[9px] text-gray-600">less</span>
+          <div class="flex gap-1">
+            <div class="w-2.5 h-2.5 rounded-[2px] bg-white/10"></div>
+            <div class="w-2.5 h-2.5 rounded-[2px]" style="background:#1e3a5f"></div>
+            <div class="w-2.5 h-2.5 rounded-[2px]" style="background:#1d6fa4"></div>
+            <div class="w-2.5 h-2.5 rounded-[2px]" style="background:#0ea5e9"></div>
+            <div class="w-2.5 h-2.5 rounded-[2px]" style="background:#38bdf8"></div>
+          </div>
+          <span class="font-mono text-[9px] text-gray-600">more</span>
+        </div>
+      </div>
+
+      <div class="overflow-x-auto">
+        <div id="month-row" class="flex gap-[3px] mb-1" style="min-width:560px;"></div>
+        <div id="contrib-graph" class="flex gap-[3px]" style="min-width:560px;"></div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-3 gap-2">
+      <div class="relative bg-white/[0.03] border border-white/10 rounded-xl p-3 overflow-hidden">
+        <div class="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-sky-500 to-sky-400 rounded-b-xl"></div>
+        <p class="font-mono text-[10px] text-gray-600 mb-1">// commits</p>
+        <p id="stat-commits" class="text-lg font-bold text-sky-400 tracking-tight">—</p>
+        <p class="font-mono text-[10px] text-gray-600 mt-0.5">recent pushes</p>
+      </div>
+      <div class="relative bg-white/[0.03] border border-white/10 rounded-xl p-3 overflow-hidden">
+        <div class="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-indigo-500 to-violet-400 rounded-b-xl"></div>
+        <p class="font-mono text-[10px] text-gray-600 mb-1">// repos</p>
+        <p id="stat-repos" class="text-lg font-bold text-indigo-400 tracking-tight">—</p>
+        <p class="font-mono text-[10px] text-gray-600 mt-0.5">repositories</p>
+      </div>
+      <div class="relative bg-white/[0.03] border border-white/10 rounded-xl p-3 overflow-hidden">
+        <div class="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-amber-500 to-yellow-400 rounded-b-xl"></div>
+        <p class="font-mono text-[10px] text-gray-600 mb-1">// stars</p>
+        <p id="stat-stars" class="text-lg font-bold text-amber-400 tracking-tight">—</p>
+        <p class="font-mono text-[10px] text-gray-600 mt-0.5">total stars</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  const USERNAME = 'PutryAzaila';
+  const COLORS = ['rgba(255,255,255,0.07)', '#1e3a5f', '#1d6fa4', '#0ea5e9', '#38bdf8'];
+  const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const curYear = new Date().getFullYear();
+  const years = [curYear, curYear - 1, curYear - 2, curYear - 3];
+  let activeYear = curYear;
+
+  function getLevel(n: number) {
+    if (!n) return 0;
+    if (n <= 2) return 1;
+    if (n <= 5) return 2;
+    if (n <= 9) return 3;
+    return 4;
+  }
+
+  function showShimmer() {
+    const wrap = document.getElementById('contrib-graph')!;
+    const mr = document.getElementById('month-row')!;
+    wrap.innerHTML = '';
+    mr.innerHTML = '';
+    const shimDiv = document.createElement('div');
+    shimDiv.style.cssText = 'display:flex;gap:3px;min-width:560px;';
+    for (let w = 0; w < 52; w++) {
+      const col = document.createElement('div');
+      col.style.cssText = 'display:flex;flex-direction:column;gap:3px;';
+      const ml = document.createElement('div');
+      ml.style.cssText = 'width:10px;height:10px;';
+      mr.appendChild(ml);
+      for (let d = 0; d < 7; d++) {
+        const c = document.createElement('div');
+        c.style.cssText = `width:10px;height:10px;border-radius:2px;background:rgba(255,255,255,0.06);animation:pulse 1.5s ease-in-out ${w * 0.02 + d * 0.01}s infinite;`;
+        col.appendChild(c);
+      }
+      shimDiv.appendChild(col);
+    }
+    wrap.appendChild(shimDiv);
+  }
+
+  function buildGraph(map: Record<string, number>, year: number) {
+    const wrap = document.getElementById('contrib-graph')!;
+    const mr = document.getElementById('month-row')!;
+    wrap.innerHTML = '';
+    mr.innerHTML = '';
+
+    const start = new Date(year, 0, 1);
+    const end = year === curYear ? new Date() : new Date(year, 11, 31);
+    const padStart = new Date(start);
+    padStart.setDate(padStart.getDate() - start.getDay());
+
+    let total = 0, cur = new Date(padStart), lastMonth = -1;
+
+    while (cur <= end || cur.getDay() !== 0) {
+      if (cur.getDay() === 0) {
+        const col = document.createElement('div');
+        col.style.cssText = 'display:flex;flex-direction:column;gap:3px;';
+
+        const mlabel = document.createElement('div');
+        mlabel.style.cssText = 'width:10px;height:10px;font-size:8px;color:#4b5563;white-space:nowrap;line-height:10px;font-family:monospace;';
+        const m = cur.getMonth();
+        if (m !== lastMonth && cur >= start) {
+          mlabel.textContent = MONTHS[m];
+          lastMonth = m;
+        }
+        mr.appendChild(mlabel);
+
+        for (let d = 0; d < 7; d++) {
+          const day = new Date(cur);
+          day.setDate(day.getDate() + d);
+          const ds = day.toISOString().split('T')[0];
+          const count = map[ds] || 0;
+          const inRange = day >= start && day <= end;
+          if (inRange) total += count;
+
+          const cell = document.createElement('div');
+          cell.style.cssText = `width:10px;height:10px;border-radius:2px;background:${inRange ? COLORS[getLevel(count)] : 'transparent'};transition:transform .1s;cursor:default;`;
+          if (inRange && count > 0) {
+            cell.title = `${count} contribution${count > 1 ? 's' : ''} — ${ds}`;
+            cell.addEventListener('mouseenter', () => cell.style.transform = 'scale(1.5)');
+            cell.addEventListener('mouseleave', () => cell.style.transform = 'scale(1)');
+          }
+          col.appendChild(cell);
+        }
+        wrap.appendChild(col);
+        cur.setDate(cur.getDate() + 7);
+      } else {
+        cur.setDate(cur.getDate() + 1);
+      }
+    }
+
+    document.getElementById('contrib-count')!.innerHTML = `<strong style="color:#38bdf8;font-size:13px;">${total}</strong> contributions in ${year}`;
+    document.getElementById('gh-sub')!.textContent = `// @${USERNAME} · activity graph`;
+  }
+
+  async function loadYear(year: number) {
+    document.getElementById('contrib-count')!.textContent = 'Loading...';
+    showShimmer();
+    const map: Record<string, number> = {};
+    try {
+      const res = await fetch(`https://github-contributions-api.jogruber.de/v4/${USERNAME}?y=${year}`);
+      if (res.ok) {
+        const data = await res.json();
+        data.contributions?.forEach((c: any) => { if (c.date) map[c.date] = c.count || 0; });
+      }
+    } catch (_) {}
+    buildGraph(map, year);
+  }
+
+  function renderTabs() {
+    const tabs = document.getElementById('year-tabs')!;
+    tabs.innerHTML = '';
+    years.forEach(y => {
+      const btn = document.createElement('button');
+      btn.textContent = String(y);
+      btn.className = `font-mono text-[11px] px-2.5 py-1 rounded-lg transition-all duration-200 ${
+        y === activeYear
+          ? 'bg-gradient-to-r from-sky-500 to-indigo-500 text-white shadow-lg shadow-indigo-500/30'
+          : 'text-gray-500 hover:text-white hover:bg-white/10'
+      }`;
+      btn.addEventListener('click', () => { activeYear = y; renderTabs(); loadYear(y); });
+      tabs.appendChild(btn);
+    });
+  }
+
+  async function loadStats() {
+    try {
+      const res = await fetch(`https://api.github.com/users/${USERNAME}/repos?per_page=100`);
+      if (res.ok) {
+        const repos = await res.json();
+        if (Array.isArray(repos)) {
+          document.getElementById('stat-repos')!.textContent = String(repos.length);
+          document.getElementById('stat-stars')!.textContent = String(
+            repos.reduce((s: number, r: any) => s + (r.stargazers_count || 0), 0)
+          );
+        }
+      }
+    } catch (_) {}
+    try {
+      const res = await fetch(`https://api.github.com/users/${USERNAME}/events?per_page=100`);
+      if (res.ok) {
+        const events = await res.json();
+        if (Array.isArray(events)) {
+          const commits = events
+            .filter((e: any) => e.type === 'PushEvent')
+            .reduce((s: number, e: any) => s + (e.payload?.commits?.length || 0), 0);
+          document.getElementById('stat-commits')!.textContent = commits > 0 ? `${commits}+` : '0';
+        }
+      }
+    } catch (_) {}
+  }
+
+  renderTabs();
+  loadYear(activeYear);
+  loadStats();
+</script>
