@@ -2,24 +2,82 @@
 import '../styles/global.css';
 
 interface Props {
-  title: string;
+  title?: string;
+  description?: string;
 }
 
-const { title } = Astro.props;
+const {
+  title = "Azaila Dwi Putri Fajarwati - Junior Web Developer & Information Systems Student",
+  description = "Portfolio Azaila Dwi Putri Fajarwati - Junior Web Developer dari Kediri, Jawa Timur. Mahasiswa Sistem Informasi dengan pengalaman di Java, PHP, Laravel, Node.js, dan React.",
+} = Astro.props;
+
+const siteUrl = "https://azailaiest.web.id";
+const ogImage = `${siteUrl}/images/profile.jpg`;
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Azaila Dwi Putri Fajarwati",
+  "alternateName": "Putri Azaila",
+  "url": siteUrl,
+  "image": ogImage,
+  "email": "putryazaila1306@gmail.com",
+  "jobTitle": "Junior Web Developer",
+  "description": "Mahasiswa Sistem Informasi dengan pengalaman dalam pengembangan web menggunakan Java, PHP, Laravel, Node.js, dan React.",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Kediri",
+    "addressRegion": "Jawa Timur",
+    "addressCountry": "ID"
+  },
+  "knowsAbout": ["Web Development", "Java", "PHP", "Laravel", "Node.js", "React", "HTML", "CSS", "Information Systems"],
+  "sameAs": [
+    "https://github.com/PutryAzaila"
+  ]
+};
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="id">
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content="Putri Azaila - Portofolio" />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/icon-favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-    
+
+    <!-- Primary SEO -->
     <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content="Azaila Dwi Putri Fajarwati, Putri Azaila, Junior Web Developer, Sistem Informasi, Laravel, React, Node.js, PHP, Kediri, portfolio web developer Indonesia" />
+    <meta name="author" content="Azaila Dwi Putri Fajarwati" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href={siteUrl} />
+
+    <!-- Open Graph (Facebook, WhatsApp, LinkedIn) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={siteUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="id_ID" />
+    <meta property="og:site_name" content="Azaila Dwi Putri Fajarwati - Portfolio" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={siteUrl} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/icon-favicon.svg" />
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   </head>
   <body class="min-h-screen">
     <div class="fixed inset-0 overflow-hidden pointer-events-none">
