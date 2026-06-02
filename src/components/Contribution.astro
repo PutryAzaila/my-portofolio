@@ -1,29 +1,21 @@
-<section id="contributions" class="py-10 px-4 md:px-6">
+<section id="contributions" class="py-10 px-4 md:px-6 bg-slate-50 dark:bg-slate-950">
   <div class="container mx-auto max-w-4xl">
 
     <div class="flex items-end justify-between flex-wrap gap-3 mb-5">
-      <div>
-        <h2 class="text-2xl md:text-3xl font-bold text-white tracking-tight">
-          GitHub <span class="bg-gradient-to-r from-sky-400 to-indigo-400 text-transparent bg-clip-text">Contributions</span>
-        </h2>
-      </div>
-      <div id="year-tabs" class="flex gap-1 bg-white/5 rounded-xl p-1"></div>
+      <h2 class="text-2xl md:text-3xl font-bold text-slate-900 dark:text-white tracking-tight">
+        GitHub <span class="bg-gradient-to-r from-violet-500 to-rose-500 text-transparent bg-clip-text">Contributions</span>
+      </h2>
+      <div id="year-tabs" class="flex gap-1 bg-slate-200 dark:bg-white/5 rounded-xl p-1"></div>
     </div>
 
-    <div class="relative bg-white/[0.03] border border-white/10 rounded-2xl p-4 mb-3 overflow-hidden">
-      <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-sky-500/40 to-indigo-500/40 to-transparent"></div>
+    <div class="relative bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-4 mb-3 overflow-hidden">
+      <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-violet-400/60 to-transparent"></div>
 
       <div class="flex items-center justify-between mb-3">
-        <p id="contrib-count" class="font-mono text-[11px] text-gray-400">Loading...</p>
-        <div class="flex items-center gap-1.5 font-mono text-[9px] text-gray-600">
+        <p id="contrib-count" class="font-mono text-[11px] text-slate-500 dark:text-slate-400">Loading...</p>
+        <div class="flex items-center gap-1.5 font-mono text-[9px] text-slate-400 dark:text-slate-600">
           <span>less</span>
-          <div class="flex gap-1">
-            <div class="w-2.5 h-2.5 rounded-[2px] bg-white/10"></div>
-            <div class="w-2.5 h-2.5 rounded-[2px]" style="background:#1e3a5f"></div>
-            <div class="w-2.5 h-2.5 rounded-[2px]" style="background:#1d6fa4"></div>
-            <div class="w-2.5 h-2.5 rounded-[2px]" style="background:#0ea5e9"></div>
-            <div class="w-2.5 h-2.5 rounded-[2px]" style="background:#38bdf8"></div>
-          </div>
+          <div class="flex gap-1" id="legend-cells"></div>
           <span>more</span>
         </div>
       </div>
@@ -35,20 +27,20 @@
     </div>
 
     <div class="grid grid-cols-3 gap-2">
-      <div class="relative bg-white/[0.03] border border-white/10 rounded-xl p-3 overflow-hidden">
-        <div class="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-sky-500 to-sky-400 rounded-b-xl"></div>
-        <p id="stat-repos" class="text-lg font-bold text-sky-400 tracking-tight">—</p>
-        <p class="font-mono text-[10px] text-gray-600 mt-0.5">repositories</p>
+      <div class="relative bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-3 overflow-hidden">
+        <div class="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-violet-500 to-rose-400 rounded-b-xl"></div>
+        <p id="stat-repos" class="text-lg font-bold text-violet-500 dark:text-violet-400 tracking-tight">—</p>
+        <p class="font-mono text-[10px] text-slate-400 dark:text-slate-500 mt-0.5">repositories</p>
       </div>
-      <div class="relative bg-white/[0.03] border border-white/10 rounded-xl p-3 overflow-hidden">
-        <div class="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-indigo-500 to-violet-400 rounded-b-xl"></div>
-        <p id="stat-followers" class="text-lg font-bold text-indigo-400 tracking-tight">—</p>
-        <p class="font-mono text-[10px] text-gray-600 mt-0.5">followers</p>
+      <div class="relative bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-3 overflow-hidden">
+        <div class="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-rose-500 to-violet-400 rounded-b-xl"></div>
+        <p id="stat-followers" class="text-lg font-bold text-rose-500 dark:text-rose-400 tracking-tight">—</p>
+        <p class="font-mono text-[10px] text-slate-400 dark:text-slate-500 mt-0.5">followers</p>
       </div>
-      <div class="relative bg-white/[0.03] border border-white/10 rounded-xl p-3 overflow-hidden">
-        <div class="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-emerald-500 to-teal-400 rounded-b-xl"></div>
-        <p id="stat-following" class="text-lg font-bold text-emerald-400 tracking-tight">—</p>
-        <p class="font-mono text-[10px] text-gray-600 mt-0.5">following</p>
+      <div class="relative bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-3 overflow-hidden">
+        <div class="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-teal-500 to-violet-400 rounded-b-xl"></div>
+        <p id="stat-following" class="text-lg font-bold text-teal-500 dark:text-teal-400 tracking-tight">—</p>
+        <p class="font-mono text-[10px] text-slate-400 dark:text-slate-500 mt-0.5">following</p>
       </div>
     </div>
 
@@ -57,11 +49,28 @@
 
 <script>
   const USERNAME = 'PutryAzaila';
-  const COLORS = ['rgba(255,255,255,0.07)', '#1e3a5f', '#1d6fa4', '#0ea5e9', '#38bdf8'];
   const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
   const curYear = new Date().getFullYear();
   const years = [curYear, curYear - 1, curYear - 2, curYear - 3];
   let activeYear = curYear;
+  let lastMap: Record<string, number> = {};
+
+  // Colors adapt to current theme
+  function getColors(): string[] {
+    const dark = document.documentElement.classList.contains('dark');
+    return dark
+      ? ['rgba(255,255,255,0.07)', '#3b1f6e', '#6d28d9', '#8b5cf6', '#c4b5fd']
+      : ['rgba(0,0,0,0.05)',        '#e9d5ff', '#a78bfa', '#7c3aed', '#5b21b6'];
+  }
+
+  function renderLegend() {
+    const c = getColors();
+    const el = document.getElementById('legend-cells');
+    if (!el) return;
+    el.innerHTML = c.map(bg =>
+      `<div style="width:10px;height:10px;border-radius:2px;background:${bg}"></div>`
+    ).join('');
+  }
 
   function getLevel(n: number) {
     if (!n) return 0; if (n <= 2) return 1; if (n <= 5) return 2; if (n <= 9) return 3; return 4;
@@ -69,8 +78,10 @@
 
   function showShimmer() {
     const wrap = document.getElementById('contrib-graph')!;
-    const mr = document.getElementById('month-row')!;
+    const mr   = document.getElementById('month-row')!;
     wrap.innerHTML = ''; mr.innerHTML = '';
+    const dark  = document.documentElement.classList.contains('dark');
+    const shimBg = dark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.06)';
     const sh = document.createElement('div');
     sh.style.cssText = 'display:flex;gap:3px;min-width:560px;';
     for (let w = 0; w < 52; w++) {
@@ -79,7 +90,7 @@
       mr.appendChild(Object.assign(document.createElement('div'), { style: 'width:10px;height:10px;' }));
       for (let d = 0; d < 7; d++) {
         const c = document.createElement('div');
-        c.style.cssText = `width:10px;height:10px;border-radius:2px;background:rgba(255,255,255,0.06);animation:pulse 1.5s ${w * 0.02 + d * 0.01}s ease-in-out infinite;`;
+        c.style.cssText = `width:10px;height:10px;border-radius:2px;background:${shimBg};animation:pulse 1.5s ${w*0.02+d*0.01}s ease-in-out infinite;`;
         col.appendChild(c);
       }
       sh.appendChild(col);
@@ -88,11 +99,16 @@
   }
 
   function buildGraph(map: Record<string, number>, year: number) {
+    lastMap = map;
+    const colors = getColors();
     const wrap = document.getElementById('contrib-graph')!;
-    const mr = document.getElementById('month-row')!;
+    const mr   = document.getElementById('month-row')!;
     wrap.innerHTML = ''; mr.innerHTML = '';
-    const start = new Date(year, 0, 1);
-    const end = year === curYear ? new Date() : new Date(year, 11, 31);
+    const dark      = document.documentElement.classList.contains('dark');
+    const labelColor = dark ? '#4b5563' : '#94a3b8';
+    const accentColor = dark ? '#c4b5fd' : '#7c3aed';
+    const start  = new Date(year, 0, 1);
+    const end    = year === curYear ? new Date() : new Date(year, 11, 31);
     const padStart = new Date(start);
     padStart.setDate(padStart.getDate() - start.getDay());
     let total = 0, cur = new Date(padStart), lastMonth = -1;
@@ -101,18 +117,18 @@
         const col = document.createElement('div');
         col.style.cssText = 'display:flex;flex-direction:column;gap:3px;';
         const ml = document.createElement('div');
-        ml.style.cssText = 'width:10px;height:10px;font-size:8px;color:#4b5563;white-space:nowrap;line-height:10px;font-family:monospace;';
+        ml.style.cssText = `width:10px;height:10px;font-size:8px;color:${labelColor};white-space:nowrap;line-height:10px;font-family:monospace;`;
         const m = cur.getMonth();
         if (m !== lastMonth && cur >= start) { ml.textContent = MONTHS[m]; lastMonth = m; }
         mr.appendChild(ml);
         for (let d = 0; d < 7; d++) {
           const day = new Date(cur); day.setDate(day.getDate() + d);
-          const ds = day.toISOString().split('T')[0];
+          const ds  = day.toISOString().split('T')[0];
           const count = map[ds] || 0;
           const inRange = day >= start && day <= end;
           if (inRange) total += count;
           const cell = document.createElement('div');
-          cell.style.cssText = `width:10px;height:10px;border-radius:2px;background:${inRange ? COLORS[getLevel(count)] : 'transparent'};transition:transform .1s;`;
+          cell.style.cssText = `width:10px;height:10px;border-radius:2px;background:${inRange ? colors[getLevel(count)] : 'transparent'};transition:transform .1s;`;
           if (inRange && count > 0) {
             cell.title = `${count} contribution${count > 1 ? 's' : ''} — ${ds}`;
             cell.addEventListener('mouseenter', () => cell.style.transform = 'scale(1.5)');
@@ -124,12 +140,14 @@
         cur.setDate(cur.getDate() + 7);
       } else { cur.setDate(cur.getDate() + 1); }
     }
-    document.getElementById('contrib-count')!.innerHTML = `<strong style="color:#38bdf8;font-size:13px;">${total}</strong> contributions in ${year}`;
-    document.getElementById('gh-sub')!.textContent = `// @${USERNAME} · activity graph`;
+    const countEl = document.getElementById('contrib-count');
+    if (countEl) countEl.innerHTML = `<strong style="color:${accentColor};font-size:13px;">${total}</strong> contributions in ${year}`;
+    renderLegend();
   }
 
   async function loadYear(year: number) {
-    document.getElementById('contrib-count')!.textContent = 'Loading...';
+    const countEl = document.getElementById('contrib-count');
+    if (countEl) countEl.textContent = 'Loading...';
     showShimmer();
     const map: Record<string, number> = {};
     try {
@@ -143,15 +161,16 @@
   }
 
   function renderTabs() {
-    const tabs = document.getElementById('year-tabs')!;
+    const tabs = document.getElementById('year-tabs');
+    if (!tabs) return;
     tabs.innerHTML = '';
     years.forEach(y => {
       const btn = document.createElement('button');
       btn.textContent = String(y);
       btn.className = `font-mono text-[11px] px-2.5 py-1 rounded-lg transition-all duration-200 ${
         y === activeYear
-          ? 'bg-gradient-to-r from-sky-500 to-indigo-500 text-white shadow-lg shadow-indigo-500/25'
-          : 'text-gray-500 hover:text-white hover:bg-white/10'
+          ? 'bg-gradient-to-r from-violet-500 to-rose-500 text-white shadow-md'
+          : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-300 dark:hover:bg-white/10'
       }`;
       btn.addEventListener('click', () => { activeYear = y; renderTabs(); loadYear(y); });
       tabs.appendChild(btn);
@@ -163,12 +182,19 @@
       const res = await fetch(`https://api.github.com/users/${USERNAME}`);
       if (res.ok) {
         const u = await res.json();
-        document.getElementById('stat-repos')!.textContent = String(u.public_repos ?? '—');
-        document.getElementById('stat-followers')!.textContent = String(u.followers ?? '—');
-        document.getElementById('stat-following')!.textContent = String(u.following ?? '—');
+        const set = (id: string, val: any) => { const el = document.getElementById(id); if (el) el.textContent = String(val ?? '—'); };
+        set('stat-repos', u.public_repos);
+        set('stat-followers', u.followers);
+        set('stat-following', u.following);
       }
     } catch (_) {}
   }
+
+  // Re-render graph when theme toggles so colors stay correct
+  new MutationObserver(() => {
+    renderTabs();
+    buildGraph(lastMap, activeYear);
+  }).observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
 
   renderTabs();
   loadYear(activeYear);

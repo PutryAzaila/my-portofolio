@@ -2,14 +2,38 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ========== THEME VARIABLES ========== */
+:root {
+  /* Light mode */
+  --bg:          #f8fafc;
+  --bg-2:        #f1f5f9;
+  --card:        #ffffff;
+  --card-hover:  #f8fafc;
+  --border:      rgba(15,23,42,0.08);
+  --border-2:    rgba(15,23,42,0.14);
+  --text-1:      #0f172a;
+  --text-2:      #475569;
+  --text-3:      #94a3b8;
+  --orb-opacity: 0.07;
+  --dot-color:   rgba(15,23,42,0.06);
+}
+html.dark {
+  --bg:          #020617;
+  --bg-2:        #0f172a;
+  --card:        rgba(255,255,255,0.04);
+  --card-hover:  rgba(255,255,255,0.07);
+  --border:      rgba(255,255,255,0.08);
+  --border-2:    rgba(255,255,255,0.15);
+  --text-1:      #f1f5f9;
+  --text-2:      #94a3b8;
+  --text-3:      #64748b;
+  --orb-opacity: 0.10;
+  --dot-color:   rgba(148,163,184,0.07);
+}
+
 @layer base {
-  html {
-    scroll-behavior: smooth;
-  }
-  
-  body {
-    @apply bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950;
-  }
+  html { scroll-behavior: smooth; }
+  /* Background & color handled by Tailwind dark: classes on <body> in Layout.astro */
 }
 
 @layer utilities {
@@ -19,7 +43,6 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
-  
   .line-clamp-3 {
     display: -webkit-box;
     -webkit-line-clamp: 3;
@@ -28,18 +51,255 @@
   }
 }
 
-/* Scroll animations */
+/* ========== THEME HELPERS ========== */
+
+.t-card {
+  background: var(--card);
+  border-color: var(--border);
+  transition: background 0.3s, border-color 0.3s;
+}
+.t-border  { border-color: var(--border); transition: border-color 0.3s; }
+.t-text-1  { color: var(--text-1); transition: color 0.3s; }
+.t-text-2  { color: var(--text-2); transition: color 0.3s; }
+.t-text-3  { color: var(--text-3); transition: color 0.3s; }
+.t-bg-2    { background: var(--bg-2); transition: background 0.3s; }
+
+/* ========== KEYFRAMES ========== */
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeInLeft {
+  from { opacity: 0; transform: translateX(-40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes fadeInRight {
+  from { opacity: 0; transform: translateX(40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.75); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@keyframes bounceIn {
+  0%   { opacity: 0; transform: scale(0.4); }
+  55%  { opacity: 1; transform: scale(1.08); }
+  75%  { transform: scale(0.95); }
+  100% { transform: scale(1); }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-12px); }
+}
+@keyframes floatSway {
+  0%, 100% { transform: translateY(0px) rotate(-2deg); }
+  50%       { transform: translateY(-10px) rotate(2deg); }
+}
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50%       { background-position: 100% 50%; }
+}
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+@keyframes blinkCursor {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+@keyframes pingSlow {
+  0%        { transform: scale(1); opacity: 0.4; }
+  75%, 100% { transform: scale(2.2); opacity: 0; }
+}
+@keyframes waveHand {
+  0%, 60%, 100% { transform: rotate(0deg); }
+  10%  { transform: rotate(14deg); }
+  20%  { transform: rotate(-8deg); }
+  30%  { transform: rotate(14deg); }
+  40%  { transform: rotate(-4deg); }
+  50%  { transform: rotate(10deg); }
+}
 @keyframes reveal {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes menuSlideDown {
+  from { opacity: 0; transform: translateY(-10px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-.reveal {
-  animation: reveal 0.6s ease-out forwards;
+/* ========== ANIMATION UTILITIES ========== */
+
+.animate-fade-in       { animation: fadeIn 0.6s ease-out both; }
+.animate-fade-in-up    { animation: fadeInUp 0.7s ease-out both; }
+.animate-fade-in-left  { animation: fadeInLeft 0.7s ease-out both; }
+.animate-fade-in-right { animation: fadeInRight 0.7s ease-out both; }
+.animate-scale-in      { animation: scaleIn 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+.animate-bounce-in     { animation: bounceIn 0.7s ease-out both; }
+.animate-float         { animation: float 3.5s ease-in-out infinite; }
+.animate-float-sway    { animation: floatSway 4s ease-in-out infinite; }
+.animate-spin-slow     { animation: spinSlow 8s linear infinite; }
+.animate-gradient      { animation: gradientShift 4s ease infinite; background-size: 200% 200%; }
+.animate-ping-slow     { animation: pingSlow 2.5s ease-out infinite; }
+.animate-blink-cursor  { animation: blinkCursor 0.8s step-end infinite; }
+.animate-wave-hand     { animation: waveHand 2s ease-in-out infinite; }
+.animate-slide-down    { animation: slideDown 0.7s ease-out both; }
+.animate-slide-up      { animation: slideUp 0.7s ease-out both; }
+.animate-menu-slide    { animation: menuSlideDown 0.22s ease-out both; }
+
+/* ========== DELAY UTILITIES ========== */
+
+.delay-100  { animation-delay: 0.1s; }
+.delay-200  { animation-delay: 0.2s; }
+.delay-300  { animation-delay: 0.3s; }
+.delay-400  { animation-delay: 0.4s; }
+.delay-500  { animation-delay: 0.5s; }
+.delay-600  { animation-delay: 0.6s; }
+.delay-700  { animation-delay: 0.7s; }
+.delay-800  { animation-delay: 0.8s; }
+.delay-900  { animation-delay: 0.9s; }
+.delay-1000 { animation-delay: 1s; }
+.delay-1200 { animation-delay: 1.2s; }
+
+/* ========== SHIMMER HOVER ========== */
+
+.shimmer-hover { position: relative; overflow: hidden; }
+.shimmer-hover::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.07) 50%, transparent 100%);
+  background-size: 200% 100%;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.shimmer-hover:hover::after {
+  opacity: 1;
+  animation: shimmer 0.8s ease-out;
+}
+
+/* ========== GRADIENT SPINNING RING ========== */
+
+.gradient-ring-wrapper { position: relative; display: inline-block; }
+.gradient-ring-wrapper::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 9999px;
+  background: conic-gradient(from 0deg, #f43f5e, #8b5cf6, #14b8a6, #f43f5e);
+  animation: spinSlow 6s linear infinite;
+  z-index: 0;
+}
+
+/* ========== SCROLL REVEAL ========== */
+
+/* Elements start hidden so they actually animate in */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(22px);
+}
+
+/* Reveal via smooth transition (respects inline transition-delay) */
+.animate-on-scroll.reveal {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+
+/* Legacy alias */
+.reveal { animation: fadeInUp 0.6s ease-out forwards; }
+
+/* ========== CARD HOVER ========== */
+
+.card-hover {
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+}
+.card-hover:hover { transform: translateY(-5px); box-shadow: 0 12px 30px -8px rgba(0,0,0,0.12); }
+html.dark .card-hover:hover { box-shadow: 0 12px 30px -8px rgba(0,0,0,0.5); }
+
+/* ========== RIPPLE BUTTON ========== */
+
+@keyframes ripple {
+  to { transform: scale(4); opacity: 0; }
+}
+.btn-ripple {
+  position: relative;
+  overflow: hidden;
+}
+.btn-ripple .ripple-circle {
+  position: absolute;
+  border-radius: 9999px;
+  background: rgba(255,255,255,0.35);
+  transform: scale(0);
+  animation: ripple 0.55s ease-out;
+  pointer-events: none;
+}
+
+/* ========== SECTION HEADER ACCENT LINE PULSE ========== */
+
+@keyframes accentPulse {
+  0%, 100% { opacity: 0.5; }
+  50%       { opacity: 1; }
+}
+.accent-line {
+  animation: accentPulse 3s ease-in-out infinite;
+}
+
+/* ========== NAV ACTIVE UNDERLINE ========== */
+
+.nav-link {
+  position: relative;
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  border-radius: 1px;
+  background: linear-gradient(to right, #f43f5e, #8b5cf6);
+  transition: width 0.2s ease, left 0.2s ease;
+}
+.nav-link:hover::after {
+  width: 60%;
+  left: 20%;
+}
+
+/* ========== THEME ICON SWITCHING (CSS-based, no JS flicker) ========== */
+html.dark  .theme-sun  { display: inline-block; }
+html.dark  .theme-moon { display: none; }
+html:not(.dark) .theme-sun  { display: none; }
+html:not(.dark) .theme-moon { display: inline-block; }
+
+/* ========== SECTION BADGE ========== */
+
+.section-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 14px;
+  border-radius: 9999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border: 1px solid;
 }

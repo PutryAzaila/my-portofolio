@@ -38,7 +38,7 @@ const jsonLd = {
 ---
 
 <!doctype html>
-<html lang="id">
+<html lang="id" class="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -79,35 +79,75 @@ const jsonLd = {
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   </head>
-  <body class="min-h-screen">
-    <div class="fixed inset-0 overflow-hidden pointer-events-none">
-      <div class="absolute -top-40 -right-40 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-float"></div>
-      <div class="absolute top-1/3 -left-40 w-96 h-96 bg-cyan-500 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-float" style="animation-delay: 2s;"></div>
-      <div class="absolute bottom-1/4 right-1/3 w-96 h-96 bg-indigo-500 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-float" style="animation-delay: 4s;"></div>
+  <body class="min-h-screen bg-slate-50 dark:bg-slate-950 transition-colors duration-300">
+    <!-- Scroll progress bar -->
+    <div id="scroll-bar"
+         class="fixed top-0 left-0 right-0 h-[3px] z-[200] pointer-events-none origin-left"
+         style="background:linear-gradient(to right,#f43f5e,#8b5cf6,#14b8a6);transform:scaleX(0);transition:transform 0.06s linear;">
     </div>
-    
+
+    <!-- Background atmospheric orbs — NO mix-blend so they show in both modes -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+      <div class="absolute -top-48 -right-32 w-[520px] h-[520px] rounded-full bg-rose-400 filter blur-3xl animate-float dark:opacity-[0.12] opacity-[0.07]"></div>
+      <div class="absolute top-1/4 -left-40 w-[460px] h-[460px] rounded-full bg-violet-500 filter blur-3xl animate-float delay-300 dark:opacity-[0.12] opacity-[0.07]"></div>
+      <div class="absolute top-2/3 right-1/4 w-[400px] h-[400px] rounded-full bg-teal-400 filter blur-3xl animate-float delay-500 dark:opacity-[0.10] opacity-[0.06]"></div>
+      <div class="absolute bottom-1/4 left-1/3 w-[360px] h-[360px] rounded-full bg-rose-300 filter blur-3xl animate-float delay-700 dark:opacity-[0.08] opacity-[0.05]"></div>
+      <!-- Dot grid -->
+      <div class="absolute inset-0 dark:opacity-100 opacity-100"
+           style="background-image: radial-gradient(circle at 1px 1px, rgba(148,163,184,0.12) 1px, transparent 0); background-size: 44px 44px;"></div>
+    </div>
+
     <div class="relative z-10">
       <slot />
     </div>
 
-    <script>
-      const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-      };
+    <!-- Theme toggle & scroll reveal -->
+    <script is:inline>
+      // Theme initialisation (runs before paint to avoid flash)
+      (function() {
+        const saved = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (saved === 'light' || (!saved && !prefersDark)) {
+          document.documentElement.classList.remove('dark');
+        } else {
+          document.documentElement.classList.add('dark');
+        }
+      })();
+    </script>
 
+    <script>
+      // ── Scroll progress bar ──────────────────────────────────────────
+      const scrollBar = document.getElementById('scroll-bar') as HTMLElement | null;
+      window.addEventListener('scroll', () => {
+        if (!scrollBar) return;
+        const h = document.documentElement;
+        const pct = h.scrollTop / (h.scrollHeight - h.clientHeight);
+        scrollBar.style.transform = `scaleX(${pct})`;
+      }, { passive: true });
+
+      // ── Scroll reveal (transition-based so inline transition-delay works) ──
       const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
+        entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add('reveal');
             observer.unobserve(entry.target);
           }
         });
-      }, observerOptions);
+      }, { threshold: 0.07, rootMargin: '0px 0px -30px 0px' });
 
-      document.addEventListener('DOMContentLoaded', () => {
-        const elements = document.querySelectorAll('.animate-on-scroll');
-        elements.forEach(el => observer.observe(el));
+      document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+
+      // ── Ripple effect for .btn-ripple elements ─────────────────────
+      document.addEventListener('click', (e) => {
+        const btn = (e.target as HTMLElement).closest('.btn-ripple') as HTMLElement | null;
+        if (!btn) return;
+        const rect = btn.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height);
+        const circle = document.createElement('span');
+        circle.className = 'ripple-circle';
+        circle.style.cssText = `width:${size}px;height:${size}px;left:${e.clientX - rect.left - size/2}px;top:${e.clientY - rect.top - size/2}px;`;
+        btn.appendChild(circle);
+        circle.addEventListener('animationend', () => circle.remove());
       });
     </script>
   </body>

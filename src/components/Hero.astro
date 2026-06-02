@@ -1,57 +1,175 @@
 ---
-
 const profileImage = '/images/profile.jpg';
 ---
 
-<section class="min-h-screen flex items-center justify-center pt-20 px-6">
-  <div class="container mx-auto text-center max-w-5xl">
+<section class="relative min-h-screen flex items-center justify-center pt-16 px-6 overflow-hidden bg-slate-50 dark:bg-slate-950">
+  <!-- Decorative bg text -->
+  <div class="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden">
+    <span class="text-[18vw] font-black leading-none text-slate-900/[0.03] dark:text-white/[0.02]">AZAILA</span>
+  </div>
+
+  <div class="container mx-auto text-center max-w-4xl relative">
+
+    <!-- Profile photo -->
     <div class="mb-8 animate-fade-in">
       <div class="relative inline-block">
-        <div class="w-40 h-40 rounded-full overflow-hidden border-4 border-gradient-to-br from-blue-500 to-cyan-500 shadow-2xl shadow-blue-500/30 animate-float">
-          <img 
-            src={profileImage} 
-            alt="Azaila Dwi Putri Fajarwati"
-            class="w-full h-full object-cover"
-          />
+        <div class="absolute -inset-6 rounded-full border border-rose-400/20 animate-ping-slow"></div>
+        <div class="absolute -inset-3 rounded-full border border-violet-400/15 animate-ping-slow delay-700"></div>
+        <div class="gradient-ring-wrapper">
+          <div class="relative z-10 w-40 h-40 rounded-full overflow-hidden border-4 bg-slate-50 dark:bg-slate-950 border-slate-50 dark:border-slate-950">
+            <img src={profileImage} alt="Azaila Dwi Putri Fajarwati" class="w-full h-full object-cover" />
+          </div>
+        </div>
+        <!-- Floating badges -->
+        <div class="absolute -top-4 -right-24 animate-float delay-200 hidden sm:block">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 rounded-full text-xs font-semibold shadow-sm whitespace-nowrap">
+            <i class="fa-brands fa-react text-sky-500"></i> React
+          </span>
+        </div>
+        <div class="absolute top-3 -left-24 animate-float delay-500 hidden sm:block">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 rounded-full text-xs font-semibold shadow-sm whitespace-nowrap">
+            <i class="fa-brands fa-laravel text-rose-500"></i> Laravel
+          </span>
+        </div>
+        <div class="absolute -bottom-3 -right-20 animate-float delay-700 hidden sm:block">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 rounded-full text-xs font-semibold shadow-sm whitespace-nowrap">
+            <i class="fa-brands fa-figma text-violet-500"></i> Figma
+          </span>
+        </div>
+        <div class="absolute -bottom-3 -left-24 animate-float delay-400 hidden sm:block">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 rounded-full text-xs font-semibold shadow-sm whitespace-nowrap">
+            <i class="fa-brands fa-node-js text-green-500"></i> Node.js
+          </span>
+        </div>
       </div>
     </div>
-    
-    <h1 class="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight animate-slide-down">
-      Hi, I'm <span class="bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-500 text-transparent bg-clip-text">Azaila Dwi Putri Fajarwati</span>
+
+    <!-- Greeting -->
+    <p class="text-slate-500 dark:text-slate-400 text-base mb-2 animate-fade-in delay-100">
+      <span class="inline-block animate-wave-hand"><i class="fa-solid fa-hand-wave text-rose-500"></i></span>
+      &nbsp;Hello, I'm
+    </p>
+
+    <!-- Name -->
+    <h1 class="text-5xl md:text-7xl font-black text-slate-900 dark:text-white mb-2 leading-tight animate-slide-down delay-200">
+      <span class="bg-gradient-to-r from-rose-500 via-violet-500 to-teal-500 text-transparent bg-clip-text animate-gradient">
+        Azaila Dwi Putri
+      </span>
     </h1>
-    
-    <p class="text-2xl md:text-3xl text-transparent bg-clip-text bg-gradient-to-r from-gray-300 to-gray-400 mb-4 animate-slide-up">
-      Junior Web Developer 
-    </p>
+    <h1 class="text-3xl md:text-5xl font-bold text-slate-700 dark:text-slate-300 mb-6 animate-slide-down delay-300">
+      Fajarwati
+    </h1>
 
-    <p class="text-lg text-gray-400 mb-12 max-w-2xl mx-auto animate-fade-in">
-      Information Systems student with strong interpersonal skills and active experience in organizations and internships. Passionate about research and information technology.
-    </p>
-
-    <div class="flex justify-center items-center gap-3 text-gray-400 mb-12 animate-fade-in">
-      <i class="fa-solid fa-location-dot text-blue-400"></i>
-      <span>Kediri, East Java, Indonesia</span>
+    <!-- Typewriter -->
+    <div class="h-9 mb-6 animate-fade-in delay-400">
+      <span id="typed-text" class="text-xl md:text-2xl font-medium text-slate-600 dark:text-slate-300"></span><span class="inline-block w-0.5 h-6 bg-rose-500 ml-0.5 align-middle animate-blink-cursor"></span>
     </div>
 
-    <div class="flex justify-center gap-4 flex-wrap animate-fade-in">
-      <a
-        href="#projects"
-        class="group inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-600 to-cyan-600 text-white rounded-full font-medium hover:shadow-xl hover:shadow-blue-500/50 transition-all duration-300 hover:scale-105"
-      >
+    <!-- Description -->
+    <p class="text-slate-500 dark:text-slate-400 mb-10 max-w-xl mx-auto animate-fade-in delay-500 text-sm md:text-base leading-relaxed">
+      Information Systems student passionate about building beautiful web experiences.
+      Active in organizations &amp; internships with strong leadership &amp; tech skills.
+    </p>
+
+    <!-- CTAs -->
+    <div class="flex justify-center gap-4 flex-wrap mb-6 animate-fade-in delay-600">
+      <a href="#projects"
+        class="btn-ripple group inline-flex items-center gap-2 px-7 py-3.5 bg-gradient-to-r from-rose-500 to-violet-500 hover:from-rose-600 hover:to-violet-600 text-white rounded-full font-semibold shadow-lg hover:shadow-rose-500/30 transition-all duration-300 hover:scale-105">
         View My Work
-        <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+        <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform duration-300"></i>
       </a>
-      <a
-        href="mailto:putryazaila1306@gmail.com"
-        class="inline-flex items-center gap-2 px-8 py-4 bg-white/10 backdrop-blur-sm text-white rounded-full font-medium hover:bg-white/20 transition-all duration-300 border border-blue-500/30 hover:border-blue-500/60 hover:scale-105"
-      >
-        <i class="fa-solid fa-envelope"></i>
+      <a href="mailto:putryazaila1306@gmail.com"
+        class="inline-flex items-center gap-2 px-7 py-3.5 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 rounded-full font-semibold border border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600 shadow-sm transition-all duration-300 hover:scale-105">
+        <i class="fa-solid fa-envelope text-rose-500"></i>
         Get in Touch
       </a>
     </div>
 
-    <div class="mt-20 animate-bounce">
-      <i class="fa-solid fa-chevron-down text-blue-400 text-2xl"></i>
+    <!-- Social icons -->
+    <div class="flex justify-center gap-3 mb-14 animate-fade-in delay-700">
+      {[
+        ['https://github.com/PutryAzaila', 'fa-brands fa-github', 'hover:bg-slate-900 hover:text-white dark:hover:bg-white dark:hover:text-slate-900'],
+        ['https://www.linkedin.com/in/azaila-dwi-putri-fajarwati-351a83276/', 'fa-brands fa-linkedin', 'hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600 dark:hover:text-white'],
+        ['mailto:putryazaila1306@gmail.com', 'fa-solid fa-envelope', 'hover:bg-rose-500 hover:text-white dark:hover:bg-rose-500 dark:hover:text-white'],
+      ].map(([href, icon, hov]) => (
+        <a href={href} target={href.startsWith('http') ? '_blank' : undefined} rel="noopener noreferrer"
+          class={`w-10 h-10 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-full flex items-center justify-center text-slate-500 dark:text-slate-400 ${hov} transition-all duration-300 hover:scale-110 shadow-sm`}>
+          <i class={icon}></i>
+        </a>
+      ))}
+    </div>
+
+    <!-- Stats with counter animation -->
+    <div id="hero-stats" class="flex justify-center items-center gap-6 md:gap-12 animate-fade-in delay-800">
+      <div class="text-center">
+        <div class="text-3xl md:text-4xl font-black text-rose-500 mb-0.5 stat-num" data-target="2" data-suffix="+">0+</div>
+        <div class="text-xs text-slate-400 dark:text-slate-500 font-semibold uppercase tracking-widest">Years Coding</div>
+      </div>
+      <div class="w-px h-10 bg-slate-200 dark:bg-slate-700"></div>
+      <div class="text-center">
+        <div class="text-3xl md:text-4xl font-black text-violet-500 mb-0.5 stat-num" data-target="10" data-suffix="+">0+</div>
+        <div class="text-xs text-slate-400 dark:text-slate-500 font-semibold uppercase tracking-widest">Projects</div>
+      </div>
+      <div class="w-px h-10 bg-slate-200 dark:bg-slate-700"></div>
+      <div class="text-center">
+        <div class="text-3xl md:text-4xl font-black text-teal-500 mb-0.5 stat-num" data-target="4" data-suffix="">0</div>
+        <div class="text-xs text-slate-400 dark:text-slate-500 font-semibold uppercase tracking-widest">Certificates</div>
+      </div>
+      <div class="w-px h-10 bg-slate-200 dark:bg-slate-700"></div>
+      <div class="text-center">
+        <div class="text-3xl md:text-4xl font-black text-rose-400 mb-0.5 stat-num" data-target="3" data-suffix="">0</div>
+        <div class="text-xs text-slate-400 dark:text-slate-500 font-semibold uppercase tracking-widest">Orgs</div>
+      </div>
+    </div>
+
+    <div class="mt-16 animate-bounce opacity-40">
+      <i class="fa-solid fa-chevron-down text-rose-400 text-xl"></i>
     </div>
   </div>
 </section>
+
+<script>
+  // ── Typewriter ────────────────────────────────────────────────────
+  const roles = ['Junior Web Developer','Information Systems Student','UI/UX Enthusiast','Problem Solver'];
+  let roleIdx = 0, charIdx = 0, isDeleting = false;
+  function typeWriter() {
+    const el = document.getElementById('typed-text');
+    if (!el) return;
+    const current = roles[roleIdx];
+    el.textContent = isDeleting ? current.substring(0, charIdx - 1) : current.substring(0, charIdx + 1);
+    isDeleting ? charIdx-- : charIdx++;
+    let speed = isDeleting ? 45 : 75;
+    if (!isDeleting && charIdx === current.length) { speed = 2200; isDeleting = true; }
+    else if (isDeleting && charIdx === 0) { isDeleting = false; roleIdx = (roleIdx + 1) % roles.length; speed = 350; }
+    setTimeout(typeWriter, speed);
+  }
+  setTimeout(typeWriter, 900);
+
+  // ── Stats counter animation ───────────────────────────────────────
+  function animateCounter(el: HTMLElement, target: number, suffix: string) {
+    const dur = 1400;
+    const start = performance.now();
+    function tick(now: number) {
+      const t = Math.min((now - start) / dur, 1);
+      const ease = 1 - Math.pow(1 - t, 3); // ease-out cubic
+      el.textContent = Math.floor(ease * target) + suffix;
+      if (t < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  const statsEl = document.getElementById('hero-stats');
+  if (statsEl) {
+    const io = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        document.querySelectorAll('.stat-num').forEach((el) => {
+          const target = parseInt((el as HTMLElement).dataset.target || '0');
+          const suffix = (el as HTMLElement).dataset.suffix || '';
+          animateCounter(el as HTMLElement, target, suffix);
+        });
+        io.disconnect();
+      }
+    }, { threshold: 0.5 });
+    io.observe(statsEl);
+  }
+</script>

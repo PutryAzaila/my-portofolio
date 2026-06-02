@@ -1,79 +1,93 @@
 ---
-// src/components/Footer.astro
 ---
 
-<footer class="py-12 px-6 border-t border-white/10">
+<div class="relative overflow-hidden" style="height:40px;margin-bottom:-1px;">
+  <svg viewBox="0 0 1440 40" preserveAspectRatio="none" class="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,20 C360,40 1080,0 1440,20 L1440,40 L0,40 Z" class="fill-slate-100 dark:fill-slate-800" fill-opacity="0.8"/>
+  </svg>
+</div>
+
+<footer class="bg-slate-100 dark:bg-slate-800 px-6 pt-12 pb-8 relative border-t border-slate-200 dark:border-slate-700">
+  <div class="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-rose-400/50 to-transparent"></div>
+
   <div class="container mx-auto max-w-6xl">
-    <div class="grid md:grid-cols-3 gap-8 mb-8">
-      <!-- About -->
+    <div class="grid md:grid-cols-3 gap-10 mb-10">
+
+      <!-- Brand -->
       <div>
-        <h3 class="text-white font-bold text-xl mb-4">Azaila Putri</h3>
-        <p class="text-gray-400 text-sm">
-          Junior Web Developer passionate about creating elegant solutions and innovative technologies.
+        <a href="#" class="font-black text-xl bg-gradient-to-r from-rose-500 to-violet-500 text-transparent bg-clip-text block mb-1">
+          Azaila Putri
+        </a>
+        <p class="text-slate-500 dark:text-slate-400 text-xs mb-4">Junior Web Developer</p>
+        <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed mb-5">
+          Passionate about creating elegant, functional web experiences that make a difference.
         </p>
-      </div>
-
-      <div>
-        <h3 class="text-white font-bold mb-4">Quick Links</h3>
-        <ul class="space-y-2">
-          <li><a href="#about" class="text-gray-400 hover:text-blue-400 transition-colors text-sm"><i class="fa-solid fa-chevron-right text-xs mr-2"></i>About</a></li>
-          <li><a href="#skills" class="text-gray-400 hover:text-blue-400 transition-colors text-sm"><i class="fa-solid fa-chevron-right text-xs mr-2"></i>Skills</a></li>
-          <li><a href="#experience" class="text-gray-400 hover:text-blue-400 transition-colors text-sm"><i class="fa-solid fa-chevron-right text-xs mr-2"></i>Experience</a></li>
-          <li><a href="#projects" class="text-gray-400 hover:text-blue-400 transition-colors text-sm"><i class="fa-solid fa-chevron-right text-xs mr-2"></i>Projects</a></li>
-          <li><a href="#contributions" class="text-gray-400 hover:text-blue-400 transition-colors text-sm"><i class="fa-solid fa-chevron-right text-xs mr-2"></i>Contributions</a></li>
-        </ul>
-      </div>
-
-      <div>
-        <h3 class="text-white font-bold mb-4">Get in Touch</h3>
-        <ul class="space-y-3">
-          <li class="flex items-center gap-2 text-gray-400 text-sm">
-            <i class="fa-solid fa-envelope text-blue-400"></i>
-            <a href="mailto:putryazaila1306@gmail.com" class="hover:text-blue-400 transition-colors">putryazaila1306@gmail.com</a>
-          </li>
-          <li class="flex items-center gap-2 text-gray-400 text-sm">
-            <i class="fa-solid fa-phone text-blue-400"></i>
-            <span>082336466625</span>
-          </li>
-          <li class="flex items-center gap-2 text-gray-400 text-sm">
-            <i class="fa-solid fa-location-dot text-blue-400"></i>
-            <span>Kediri, East Java, Indonesia</span>
-          </li>
-        </ul>
-
-        <div class="flex gap-3 mt-4">
-          <a
-            href="https://github.com/PutryAzaila"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="w-10 h-10 bg-white/10 backdrop-blur-sm rounded-full hover:bg-white/20 transition-all duration-300 hover:scale-110 border border-white/20 flex items-center justify-center"
-          >
-            <i class="fa-brands fa-github text-white"></i>
-          </a>
-          <a
-            href="https://www.linkedin.com/in/azaila-dwi-putri-fajarwati-351a83276/"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="w-10 h-10 bg-white/10 backdrop-blur-sm rounded-full hover:bg-white/20 transition-all duration-300 hover:scale-110 border border-white/20 flex items-center justify-center"
-          >
-            <i class="fa-brands fa-linkedin text-white"></i>
-          </a>
-          <a
-            href="mailto:putryazaila1306@gmail.com"
-            class="w-10 h-10 bg-white/10 backdrop-blur-sm rounded-full hover:bg-white/20 transition-all duration-300 hover:scale-110 border border-white/20 flex items-center justify-center"
-          >
-            <i class="fa-solid fa-envelope text-white"></i>
-          </a>
+        <div class="flex gap-3">
+          {[
+            ['https://github.com/PutryAzaila','fa-brands fa-github','hover:bg-slate-900 dark:hover:bg-white hover:text-white dark:hover:text-slate-900'],
+            ['https://www.linkedin.com/in/azaila-dwi-putri-fajarwati-351a83276/','fa-brands fa-linkedin','hover:bg-blue-600 hover:text-white'],
+            ['mailto:putryazaila1306@gmail.com','fa-solid fa-envelope','hover:bg-rose-500 hover:text-white'],
+          ].map(([href, icon, hov]) => (
+            <a href={href} target={href.startsWith('http') ? '_blank' : undefined} rel="noopener noreferrer"
+              class={`w-9 h-9 bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded-xl flex items-center justify-center text-slate-500 dark:text-slate-400 ${hov} transition-all duration-300 hover:scale-110`}>
+              <i class={`${icon} text-sm`}></i>
+            </a>
+          ))}
         </div>
+      </div>
+
+      <!-- Quick Links -->
+      <div>
+        <h3 class="text-slate-900 dark:text-white font-bold mb-5 text-sm flex items-center gap-2">
+          <i class="fa-solid fa-link text-rose-500 text-xs"></i> Quick Links
+        </h3>
+        <ul class="space-y-2.5">
+          {[['#about','About'],['#skills','Skills'],['#experience','Experience'],
+            ['#education','Education'],['#certificates','Certificates'],
+            ['#projects','Projects'],['#contributions','Contributions']].map(([href, label]) => (
+            <li>
+              <a href={href} class="flex items-center gap-2 text-slate-500 dark:text-slate-400 hover:text-rose-500 dark:hover:text-rose-400 transition-colors text-sm group">
+                <i class="fa-solid fa-chevron-right text-xs opacity-40 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all"></i>
+                {label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Contact -->
+      <div>
+        <h3 class="text-slate-900 dark:text-white font-bold mb-5 text-sm flex items-center gap-2">
+          <i class="fa-solid fa-address-card text-teal-500 text-xs"></i> Get in Touch
+        </h3>
+        <ul class="space-y-4">
+          {[
+            ['fa-solid fa-envelope',     'from-rose-500 to-violet-500',  'putryazaila1306@gmail.com',    'mailto:putryazaila1306@gmail.com'],
+            ['fa-solid fa-phone',        'from-teal-500 to-violet-500',  '082336466625',                 null],
+            ['fa-solid fa-location-dot', 'from-violet-500 to-rose-500',  'Kediri, East Java, Indonesia', null],
+          ].map(([icon, grad, text, href]) => (
+            <li class="flex items-start gap-3">
+              <span class={`w-8 h-8 bg-gradient-to-br ${grad} rounded-lg flex items-center justify-center flex-shrink-0`}>
+                <i class={`${icon} text-white text-xs`}></i>
+              </span>
+              {href
+                ? <a href={href} class="text-slate-500 dark:text-slate-400 hover:text-rose-500 dark:hover:text-rose-400 transition-colors text-sm break-all">{text}</a>
+                : <span class="text-slate-500 dark:text-slate-400 text-sm">{text}</span>
+              }
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
 
-    <!-- Bottom Bar -->
-    <div class="border-t border-white/10 pt-8">
-      <div class="text-center">
-        <p class="text-gray-400 text-sm">
-          © 2025 Azaila Dwi Putri Fajarwati. All rights reserved.
-        </p>
+    <div class="border-t border-slate-200 dark:border-slate-700 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <p class="text-slate-400 dark:text-slate-500 text-xs">
+        &copy; 2025 <span class="text-slate-600 dark:text-slate-400">Azaila Dwi Putri Fajarwati</span>. All rights reserved.
+      </p>
+      <div class="flex items-center gap-1.5 text-xs text-slate-400 dark:text-slate-500">
+        <span>Built with</span>
+        <i class="fa-solid fa-heart text-rose-500 text-xs"></i>
+        <span>using Astro &amp; Tailwind CSS</span>
       </div>
     </div>
   </div>
