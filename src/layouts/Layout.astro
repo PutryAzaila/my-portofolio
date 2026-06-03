@@ -97,6 +97,8 @@ const jsonLd = {
            style="background-image: radial-gradient(circle at 1px 1px, rgba(148,163,184,0.12) 1px, transparent 0); background-size: 44px 44px;"></div>
     </div>
 
+    <div id="motion-spotlight" class="motion-spotlight" aria-hidden="true"></div>
+
     <div class="relative z-10">
       <slot />
     </div>
@@ -138,6 +140,53 @@ const jsonLd = {
       document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
 
       // ── Ripple effect for .btn-ripple elements ─────────────────────
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const spotlight = document.getElementById('motion-spotlight') as HTMLElement | null;
+      let pointerX = window.innerWidth / 2;
+      let pointerY = window.innerHeight / 2;
+      let currentX = pointerX;
+      let currentY = pointerY;
+      let pointerVisible = false;
+      let rafId = 0;
+
+      function moveSpotlight() {
+        rafId = 0;
+        currentX += (pointerX - currentX) * 0.16;
+        currentY += (pointerY - currentY) * 0.16;
+        if (spotlight) {
+          spotlight.style.transform = `translate3d(${currentX - 180}px, ${currentY - 180}px, 0)`;
+          spotlight.style.opacity = pointerVisible ? '1' : '0';
+        }
+        if (Math.abs(pointerX - currentX) > 0.5 || Math.abs(pointerY - currentY) > 0.5) {
+          rafId = requestAnimationFrame(moveSpotlight);
+        }
+      }
+
+      if (!reduceMotion && spotlight) {
+        window.addEventListener('pointermove', (e) => {
+          pointerX = e.clientX;
+          pointerY = e.clientY;
+          pointerVisible = true;
+          if (!rafId) rafId = requestAnimationFrame(moveSpotlight);
+        }, { passive: true });
+
+        window.addEventListener('pointerleave', () => {
+          pointerVisible = false;
+          if (!rafId) rafId = requestAnimationFrame(moveSpotlight);
+        }, { passive: true });
+
+        document.querySelectorAll('.card-hover').forEach((card) => {
+          card.addEventListener('pointermove', (e) => {
+            const el = card as HTMLElement;
+            const rect = el.getBoundingClientRect();
+            const x = (((e as PointerEvent).clientX - rect.left) / rect.width) * 100;
+            const y = (((e as PointerEvent).clientY - rect.top) / rect.height) * 100;
+            el.style.setProperty('--mouse-x', `${x}%`);
+            el.style.setProperty('--mouse-y', `${y}%`);
+          }, { passive: true });
+        });
+      }
+
       document.addEventListener('click', (e) => {
         const btn = (e.target as HTMLElement).closest('.btn-ripple') as HTMLElement | null;
         if (!btn) return;
